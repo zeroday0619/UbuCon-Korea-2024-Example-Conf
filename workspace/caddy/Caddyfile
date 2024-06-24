@@ -8,19 +8,17 @@
   }
 }
 
-
-### IRC START ###
-https://irc.intra.zeroday0619.dev:443 {
-	import cloudflare
-	reverse_proxy http://muesli-vps.tail17615f.ts.net:9000
-}
-
-### IRC END ###
-
 ### Landscape START ###
 https://landscape.intra.zeroday0619.dev:443 {
 	import cloudflare
 	reverse_proxy { 
+	        header_up Host {host}
+	        header_up X-Real-IP {remote}
+	        header_up X-Forwarded-For {remote}
+                header_up X-Forwarded-Port {server_port}
+                header_up X-Forwarded-Proto {scheme}
+		header_down "Set-Cookie *; SameSite=None; Secure"
+
 		to https://muesli-vps.tail17615f.ts.net:10443
 		transport http {
 			tls
