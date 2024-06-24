@@ -1,0 +1,54 @@
+{
+  email <cloudflare email>
+}
+
+(cloudflare) {
+  tls {
+    dns cloudflare <cloudflare token>
+  }
+}
+
+
+### IRC START ###
+https://irc.intra.zeroday0619.dev:443 {
+	import cloudflare
+	reverse_proxy http://muesli-vps.tail17615f.ts.net:9000
+}
+
+### IRC END ###
+
+### Landscape START ###
+https://landscape.intra.zeroday0619.dev:443 {
+	import cloudflare
+	reverse_proxy { 
+		to https://muesli-vps.tail17615f.ts.net:10443
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+	
+}
+
+(layer4) {
+    servers {
+        landscape {
+            listen ["0.0.0.0:6554"],
+            routes [
+                {
+                    handle [
+                        { 
+			    handler proxy 
+			    upstreams  [
+				{ 
+				    dial  [muesli-vps.tail17615f.ts.net:6554]
+				}
+			    ]
+			}
+                    ]
+                }
+            ]
+        }
+    }
+}
+### Landscape END ###
