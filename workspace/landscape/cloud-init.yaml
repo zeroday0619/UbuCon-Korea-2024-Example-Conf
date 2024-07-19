@@ -78,10 +78,10 @@ runcmd:
 {% endif %}
 
 {% if SMTP_HOST %}
-  - postconf -e myhostname="{{ FQDN }}"
-  - postconf -e mydomain="{{ DOMAIN }}"
-  - postconf -e myorigin="{{ DOMAIN }}"
-  - postconf -e masquerade_domains="{{ DOMAIN }}"
+  - postconf -e myhostname="landscape.intra.zeroday0619.dev"
+  - postconf -e mydomain="landscape.intra.zeroday0619.dev"
+  - postconf -e myorigin="landscape.intra.zeroday0619.dev"
+  - postconf -e masquerade_domains="landscape.intra.zeroday0619.dev"
   - postconf -e mydestination=localhost
   - postconf -e default_transport=smtp
   - postconf -e relay_transport=smtp
