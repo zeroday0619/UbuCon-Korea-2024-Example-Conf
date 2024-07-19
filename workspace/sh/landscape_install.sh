@@ -6,6 +6,11 @@ snap list lxd &> /dev/null && sudo snap refresh lxd --channel latest/stable || s
 ## Configure LXD
 sudo lxd init --auto
 
+## UFW Setup 
+sudo ufw allow in on lxdbr0
+sudo ufw route allow in on lxdbr0
+sudo ufw route allow out on lxdbr0
+
 ## Install and configure Landscape
 
 ### Step 1
