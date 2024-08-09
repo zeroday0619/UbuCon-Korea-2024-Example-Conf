@@ -7,3 +7,4 @@ sudo apt update
 sudo apt install xcaddy
 
 xcaddy build --with github.com/mholt/caddy-l4 --with github.com/caddy-dns/cloudflare
+sudo mv caddy /usr/bin
